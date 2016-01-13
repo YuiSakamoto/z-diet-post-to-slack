@@ -1,0 +1,4 @@
+vendor/*
+.idea/
+tmp/*
+app/config/config_*.php
