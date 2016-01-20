@@ -24,7 +24,8 @@ class Application extends DCApplication
     {
         $container['service.Oauth'] = function () use ($container) {
             return new OauthService(
-                $container
+                $container,
+                $this->getTmpDir()
             );
         };
     }

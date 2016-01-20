@@ -22,6 +22,24 @@ class IndexController extends Controller
 
     public function authorize()
     {
-        var_dump($this->query('userid'));exit;
+        $oauth_token = $this->query('oauth_token');
+        $oauth_service = $this->container['service.Oauth'];
+
+        $responses = $oauth_service->generateAccessToken($oauth_token);
+        $oauth_service->saveTokens($responses);
+
+        return $this->render('index/input_nickname', [
+            'userid' => $responses[2],
+        ]);
+    }
+
+    public function finish()
+    {
+        $name = $this->body('name');
+        $userid = $this->body('userid');
+        $oauth_service = $this->container['service.Oauth'];
+
+        $oauth_service->saveName($userid, $name);
+        return $this->render('index/finish');
     }
 }

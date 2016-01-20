@@ -19,6 +19,7 @@ class Route implements RouteInterface
         return [
             ['GET', '/', 'Index::index'],
             ['GET', '/authorize', 'Index::authorize'],
+            ['POST', '/finish', 'Index::finish'],
         ];
     }
 }
