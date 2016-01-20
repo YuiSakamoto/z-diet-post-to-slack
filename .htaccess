@@ -1,13 +1,7 @@
 RewriteEngine On
 
-RewriteCond %{REQUEST_URI} !/$
-RewriteCond %{REQUEST_URI} !\.[^/\.]+$
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1/ [R=301,L]
-
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !\.(css|gif|jpg|png|svg|js|ico|ttf|otf|eot|woff|woff2)$
-RewriteRule ^(.*)$ index.php [QSA,L] #FIXME not found page
+RewriteRule ^$ index.php [QSA,L]
 
 <IfModule mod_expires.c>
 ExpiresActive On
