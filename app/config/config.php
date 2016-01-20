@@ -10,13 +10,14 @@ return [
         'request_token'   => 'https://oauth.withings.com/account/request_token',
         'authorize'   => 'https://oauth.withings.com/account/authorize',
         'access_token'   => 'https://oauth.withings.com/account/access_token',
+        'measure' => 'http://wbsapi.withings.net/measure',
     ],
     'callback_url' => [
-        'authorize'   => 'http://z-diet.herokuapp.com/authorize',
-        //'authorize'   => 'http://localhost:8000/authorize',
+        'authorize'   => 'http://localhost:8000/authorize',
     ],
     'api_key' => '',
     'api_key_secret' => '',
+    'slack_webhook_url' => '',
     'logger' => [
         'path' => dirname(dirname(__DIR__)) . '/tmp/z-diet.log',
         'level' => \Monolog\Logger::WARNING,
