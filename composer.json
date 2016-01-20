@@ -8,14 +8,8 @@
             "email": "yui_tang.dev@gmail.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:kouzoh/dietcube.git"
-        }
-    ],
     "require": {
-      "dietcube/dietcube": "dev-master",
+      "dietcube/dietcube": "^1.0",
         "guzzlehttp/guzzle": "~6.0",
         "symfony/console": "^3.0"
     },

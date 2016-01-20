@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6fec9cb2925240a28824aadefabe05f5",
-    "content-hash": "14b89be55e15356dc2270836b59a4b62",
+    "hash": "f0ee247cc999f6c604362543050542aa",
+    "content-hash": "58401ae411d0b293c788db4bd302d321",
     "packages": [
         {
             "name": "dietcube/dietcube",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:kouzoh/dietcube.git",
-                "reference": "a7df2b1b872a40b0f9629304818131ba7eeed211"
+                "url": "https://github.com/mercari/dietcube.git",
+                "reference": "2cf331cba51bbcb179cc953d2e6ac36ee2b19870"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kouzoh/dietcube/zipball/ba6180ff9a1181e7fdbabe03fd0021f06a0012e0",
-                "reference": "a7df2b1b872a40b0f9629304818131ba7eeed211",
+                "url": "https://api.github.com/repos/mercari/dietcube/zipball/2cf331cba51bbcb179cc953d2e6ac36ee2b19870",
+                "reference": "2cf331cba51bbcb179cc953d2e6ac36ee2b19870",
                 "shasum": ""
             },
             "require": {
@@ -26,6 +26,7 @@
                 "nikic/fast-route": "0.7.x",
                 "pimple/pimple": "3.0.x",
                 "psr/log": "1.0.0",
+                "symfony/event-dispatcher": "3.0.x",
                 "twig/twig": "1.23.x"
             },
             "require-dev": {
@@ -40,23 +41,12 @@
                     "Dietcube\\": "src/"
                 }
             },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ],
-                "cs-fix": [
-                    "php-cs-fixer fix"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "dietcube",
-            "support": {
-                "source": "https://github.com/kouzoh/dietcube/tree/master",
-                "issues": "https://github.com/kouzoh/dietcube/issues"
-            },
-            "time": "2016-01-05 13:37:40"
+            "time": "2016-01-13 08:55:24"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -543,6 +533,66 @@
             "time": "2015-12-22 10:39:06"
         },
         {
+            "name": "symfony/event-dispatcher",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "d36355e026905fa5229e1ed7b4e9eda2e67adfcf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/d36355e026905fa5229e1ed7b4e9eda2e67adfcf",
+                "reference": "d36355e026905fa5229e1ed7b4e9eda2e67adfcf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "~2.8|~3.0",
+                "symfony/dependency-injection": "~2.8|~3.0",
+                "symfony/expression-language": "~2.8|~3.0",
+                "symfony/stopwatch": "~2.8|~3.0"
+            },
+            "suggest": {
+                "symfony/dependency-injection": "",
+                "symfony/http-kernel": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\EventDispatcher\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony EventDispatcher Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-10-30 23:35:59"
+        },
+        {
             "name": "symfony/polyfill-mbstring",
             "version": "v1.0.1",
             "source": {
@@ -666,9 +716,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "dietcube/dietcube": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
