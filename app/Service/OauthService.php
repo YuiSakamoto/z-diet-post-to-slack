@@ -16,6 +16,8 @@ class OauthService
 
     const OAUTH_VERSION = '1.0';
     const OAUTH_SIGNATURE_METHOD = 'HMAC-SHA1';
+    protected $api_key;
+    protected $api_key_secret;
     protected $container;
     protected $oauth_token_secret_path;
 
@@ -24,6 +26,8 @@ class OauthService
         $this->container = $container;
         $this->oauth_token_secret_path = $tmp_dir_path . '/oauth_token_secret';
         $this->user_tokens_dir_path = $tmp_dir_path . '/users';
+        $this->api_key = $this->container['app.config']->get('api_key') ? $this->container['app.config']->get('api_key') : getenv('Z_DIET_API_KEY');
+        $this->api_key_secret = $this->container['app.config']->get('api_key_secret') ? $this->container['app.config']->get('api_key_secret') : getenv('Z_DIET_API_KEY_SECRET');
     }
 
     public function getRequestToken()
@@ -38,7 +42,7 @@ class OauthService
         $oauth_signature_data = rawurlencode('GET') . '&'
             . rawurlencode($this->container['app.config']->get('request_url.request_token')). '&'
             . rawurlencode('oauth_callback=' . rawurlencode($this->container['app.config']->get('callback_url.authorize')) . '&')
-            . rawurlencode('oauth_consumer_key=' . $this->container['app.config']->get('api_key') . '&')
+            . rawurlencode('oauth_consumer_key=' . $this->api_key . '&')
             . rawurlencode('oauth_nonce=' . $oauth_nonce . '&')
             . rawurlencode('oauth_signature_method=' . self::OAUTH_SIGNATURE_METHOD . '&')
             . rawurlencode('oauth_timestamp=' . $oauth_timestamp . '&')
@@ -46,14 +50,14 @@ class OauthService
         $oauth_signature = hash_hmac(
             'sha1',
             $oauth_signature_data,
-            rawurlencode($this->container['app.config']->get('api_secret')) . '&',
+            rawurlencode($this->api_key_secret) . '&',
             true
         );
 
         try {
             $query = ['query' => [
                 'oauth_callback'            => $this->container['app.config']->get('callback_url.authorize'),
-                'oauth_consumer_key'        => $this->container['app.config']->get('api_key'),
+                'oauth_consumer_key'        => $this->api_key,
                 'oauth_nonce'               => $oauth_nonce,
                 'oauth_signature'           => base64_encode($oauth_signature),
                 'oauth_signature_method'    => self::OAUTH_SIGNATURE_METHOD,
@@ -79,7 +83,7 @@ class OauthService
         $oauth_timestamp = time();
         $oauth_signature_data = rawurlencode('GET') . '&'
             . rawurlencode($this->container['app.config']->get('request_url.authorize')). '&'
-            . rawurlencode('oauth_consumer_key=' . $this->container['app.config']->get('api_key') . '&')
+            . rawurlencode('oauth_consumer_key=' . $this->api_key . '&')
             . rawurlencode('oauth_nonce=' . $oauth_nonce . '&')
             . rawurlencode('oauth_signature_method=' . self::OAUTH_SIGNATURE_METHOD . '&')
             . rawurlencode('oauth_timestamp=' . $oauth_timestamp . '&')
@@ -88,12 +92,12 @@ class OauthService
         $oauth_signature = hash_hmac(
             'sha1',
             $oauth_signature_data,
-            rawurlencode($this->container['app.config']->get('api_secret')) . '&' . rawurlencode($tokens['oauth_token_secret']),
+            rawurlencode($this->api_key_secret) . '&' . rawurlencode($tokens['oauth_token_secret']),
             true
         );
 
         $url = $this->container['app.config']->get('request_url.authorize');
-        $url .= '?' . 'oauth_consumer_key=' . rawurlencode($this->container['app.config']->get('api_key')) . '&'
+        $url .= '?' . 'oauth_consumer_key=' . rawurlencode($this->api_key) . '&'
             . 'oauth_nonce=' .rawurlencode( $oauth_nonce) . '&'
             . 'oauth_signature=' . rawurlencode(base64_encode($oauth_signature)) . '&'
             . 'oauth_signature_method=' . rawurlencode(self::OAUTH_SIGNATURE_METHOD) . '&'
@@ -114,7 +118,7 @@ class OauthService
         $oauth_timestamp = time();
         $oauth_signature_data = rawurlencode('GET') . '&'
             . rawurlencode($this->container['app.config']->get('request_url.access_token')). '&'
-            . rawurlencode('oauth_consumer_key=' . $this->container['app.config']->get('api_key') . '&')
+            . rawurlencode('oauth_consumer_key=' . $this->api_key . '&')
             . rawurlencode('oauth_nonce=' . $oauth_nonce . '&')
             . rawurlencode('oauth_signature_method=' . self::OAUTH_SIGNATURE_METHOD . '&')
             . rawurlencode('oauth_timestamp=' . $oauth_timestamp . '&')
@@ -123,13 +127,13 @@ class OauthService
         $oauth_signature = hash_hmac(
             'sha1',
             $oauth_signature_data,
-            rawurlencode($this->container['app.config']->get('api_secret')) . '&' . rawurlencode(file_get_contents($this->oauth_token_secret_path)),
+            rawurlencode($this->api_key_secret) . '&' . rawurlencode(file_get_contents($this->oauth_token_secret_path)),
             true
         );
 
         try {
             $query = ['query' => [
-                'oauth_consumer_key'        => $this->container['app.config']->get('api_key'),
+                'oauth_consumer_key'        => $this->api_key,
                 'oauth_nonce'               => $oauth_nonce,
                 'oauth_signature'           => base64_encode($oauth_signature),
                 'oauth_signature_method'    => self::OAUTH_SIGNATURE_METHOD,
