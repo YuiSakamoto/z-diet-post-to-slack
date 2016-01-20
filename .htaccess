@@ -1,0 +1,25 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{REQUEST_URI} !\.[^/\.]+$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !\.(css|gif|jpg|png|svg|js|ico|ttf|otf|eot|woff|woff2)$
+RewriteRule ^(.*)$ index.php [QSA,L] #FIXME not found page
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/gif "access plus 10 year"
+ExpiresByType image/png "access plus 10 year"
+ExpiresByType image/jpg "access plus 10 year"
+ExpiresByType image/jpeg "access plus 10 year"
+ExpiresByType text/css "access plus 1 hours"
+ExpiresByType text/javascript "access plus 1 hours"
+</IfModule>
+FileETag none
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/javascript text/css image/svg+xml
+</IfModule>
