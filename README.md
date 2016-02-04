@@ -15,6 +15,7 @@ return [
     'api_key' => 'Your app`s api key',
     'api_key_secret' => 'Your app`s api key secret',
     'slack_webhook_url' => 'Your slack webhook url',
+    'timestamp_of_reference' => 1452265200,
 ];
 ```
 - Setting cron
