@@ -18,6 +18,7 @@ return [
     'api_key' => '',
     'api_key_secret' => '',
     'slack_webhook_url' => '',
+    'timestamp_of_reference' => 1452265200,
     'logger' => [
         'path' => dirname(dirname(__DIR__)) . '/tmp/z-diet.log',
         'level' => \Monolog\Logger::WARNING,

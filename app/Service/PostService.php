@@ -43,7 +43,7 @@ class PostService
         $caluced_array = [];
         foreach($respose as $name => $user_data) {
             // パーセント計算
-            $parcent = round($user_data['latest']['measures'][0]['value'] / $user_data['reference']['measures'][0]['value'], 4);
+            $parcent = 100 * round($user_data['latest']['measures'][0]['value'] / $user_data['reference']['measures'][0]['value'], 4);
             $caluced_array[$name] = $parcent;
         }
         asort($caluced_array);

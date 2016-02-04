@@ -39,7 +39,7 @@ class BodyMeasureService extends AbstractApiService
             . rawurlencode('oauth_timestamp=' . $oauth_timestamp . '&')
             . rawurlencode('oauth_token=' . $user->getOauthToken() . '&')
             . rawurlencode('oauth_version=' . self::OAUTH_VERSION . '&')
-            . rawurlencode('startdate=1452265200&')
+            . rawurlencode('startdate=' . $this->container['app.config']->get('timestamp_of_reference') . '&')
             . rawurlencode('userid=' . $user->getUserId());
         $oauth_signature = hash_hmac(
             'sha1',
@@ -59,7 +59,7 @@ class BodyMeasureService extends AbstractApiService
                 'oauth_token'               => $user->getOauthToken(),
                 'oauth_version'             => self::OAUTH_VERSION,
                 'userid'                    => $user->getUserId(),
-                'startdate'                 => 1452265200,
+                'startdate'                 => $this->container['app.config']->get('timestamp_of_reference'),
                 'meastype'                  => 1,
             ]];
             $response = $this->client->request('GET', $this->container['app.config']->get('request_url.measure'), $query);
