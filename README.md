@@ -9,15 +9,15 @@ As a comparison reference timestamp settings of config_production.php of `timest
 ```
 z-diet BOT [10:00] 
 【今日の結果】
-1位:yui_tang => 90.00%
-2位:kinosh => 91.11%
-3位:ryosuke => 92.22%
-4位:ttsuruoka => 93.33%
-5位:Ryomats  => 94.44%
-6位:hisatomo => 95.55%
-7位:yukihamada => 96.66%
-8位:sotarok => 97.77%
-9位:suadd => 98.88%
+1位:Brian => 90.00%
+2位:James => 91.11%
+3位:Lucas => 92.22%
+4位:Jackson => 93.33%
+5位:Emma => 94.44%
+6位:Olivia => 95.55%
+7位:Charlotte => 96.66%
+8位:Chloe => 97.77%
+9位:Harper => 98.88%
 ```
 
 ## Setup
