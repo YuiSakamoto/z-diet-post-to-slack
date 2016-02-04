@@ -6,6 +6,8 @@ As a comparison reference timestamp settings of config_production.php of `timest
 
 This application does not use the database. Data files that are generated are stored in the Path/To/tmp dir.
 
+Environment in which it was confirmed that to work properly only PHP7.0.2.
+
 ## Post example
 
 ```
