@@ -4,6 +4,8 @@ This application using the API of withings, provides the ability to post a measu
 
 As a comparison reference timestamp settings of config_production.php of `timestamp_of_reference`, and the first data in the comparison reference timestamp later, we compared the latest data at the time of batch execution, and post the results to the slack.
 
+This application does not use the database. Data files that are generated are stored in the Path/To/tmp dir.
+
 ## Post example
 
 ```
