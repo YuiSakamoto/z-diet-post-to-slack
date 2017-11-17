@@ -13,7 +13,7 @@ return [
         'measure' => 'http://wbsapi.withings.net/measure',
     ],
     'callback_url' => [
-        'authorize'   => 'http://localhost:8000/authorize',
+        'authorize'   => 'http://8.35.193.50/authorize',
     ],
     'api_key' => '',
     'api_key_secret' => '',
