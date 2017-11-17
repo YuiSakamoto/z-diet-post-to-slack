@@ -29,6 +29,7 @@ class PostService
         $payload = [
             'text'   => $text,
         ];
+
         $jsonDataEncoded = json_encode($payload);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
@@ -39,18 +40,31 @@ class PostService
 
     protected function createText($respose)
     {
-        $text = "【今日の結果】\n";
+        $text = "5th season has begun!!\nToday's results(Compared to 1st Jan.)\n";
         $caluced_array = [];
         foreach($respose as $name => $user_data) {
+            if (!$user_data['latest']['measures'][0]['value'] || !$user_data['reference']['measures'][0]['value']) {
+                continue;
+            }
             // パーセント計算
-            $parcent = round($user_data['latest']['measures'][0]['value'] / $user_data['reference']['measures'][0]['value'], 4);
+            $unit = $user_data['latest']['measures'][0]['unit'] + $user_data['reference']['measures'][0]['unit'];
+            $parcent = round($user_data['latest']['measures'][0]['value'] / $user_data['reference']['measures'][0]['value'] * (10 ** (-$unit)) / 10000, 4);
             $caluced_array[$name] = $parcent;
         }
         asort($caluced_array);
 
         $count = 1;
         foreach($caluced_array as $name => $v) {
-            $text .= $count . '位:' . $name . ' => ' . $v . "%\n";
+            if ($count === 1) {
+                $text .= $count . 'st';
+            } elseif ($count === 2) {
+                $text .= $count . 'nd';
+            } elseif ($count === 3) {
+                $text .= $count . 'rd';
+            } else {
+                $text .= $count . 'th';
+            }
+            $text .= ':' . $name . ' => ' . $v . "%\n";
             $count++;
         }
         return $text;
